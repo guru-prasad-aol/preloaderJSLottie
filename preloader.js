@@ -49,7 +49,7 @@ function initializePreloader() {
             renderer: 'svg', // or 'canvas' if preferred
             loop: true,
             autoplay: true,
-            path: 'https://cdn.jsdelivr.net/gh/guru-prasad-aol/preloaderJSLottie@main/JVGIsylS3F-3.json',
+            path: 'https://cdn.jsdelivr.net/gh/guru-prasad-aol/preloaderJSLottie@2343442/JVGIsylS3F-3.json',
         });
     }
 
