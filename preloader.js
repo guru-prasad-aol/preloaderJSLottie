@@ -38,7 +38,7 @@ function hideOverlay() {
         renderer: 'svg', // ou 'canvas' se preferir
         loop: true,
         autoplay: true,
-        path: 'https://guru-prasad-aol.github.io/preloaderJSLottie/JVGIsylS3F-3.json',
+        path: 'https://cdn.jsdelivr.net/gh/guru-prasad-aol/preloaderJSLottie@main/JVGIsylS3F-3.json',
     });
 }
 
