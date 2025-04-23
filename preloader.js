@@ -46,7 +46,7 @@ function initializePreloader() {
         // Load the Lottie animation
         lottie.loadAnimation({
             container: lottieContainer,
-            renderer: 'svg', // or 'canvas' if preferred
+            renderer: 'canvas', // or 'canvas' if preferred
             loop: true,
             autoplay: true,
             path: 'https://lottie.host/13227c8b-9d9c-477d-ac30-ab0f62190f38/ABkzG7NhCG.lottie',
