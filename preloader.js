@@ -49,7 +49,7 @@ function initializePreloader() {
             renderer: 'canvas', // or 'canvas' if preferred
             loop: true,
             autoplay: true,
-            path: 'https://lottie.host/b9831b55-ebe1-45b9-a675-8c3712359e5e/yg5M08le8c.lottie',
+            path: 'https://guru-prasad-aol.github.io/preloaderJSLottie/JoynIncreasesWhenSharedAnimation.lottie',
         });
     }
 
