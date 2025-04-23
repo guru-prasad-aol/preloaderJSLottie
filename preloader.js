@@ -1,58 +1,68 @@
-// Include the Lottie library by dynamically creating a script element
-(function() {
-    const lottieScript = document.createElement('script');
-    lottieScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js';
-    lottieScript.onload = () => {
-        // Lottie library is loaded, now we can proceed with the rest of the script
-        initializePreloader();
-    };
-    document.head.appendChild(lottieScript);
-})();
+// Preloader.js: A script to play a Lottie animation from a remote URL with optimized loading.
 
-function initializePreloader() {
-    const overlay = document.createElement('div');
-    overlay.id = 'loader';
-    overlay.style.cssText = `
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.7);
-        z-index: 999;
-    `;
+// Create and append a container for the Lottie animation
+const createPreloaderContainer = () => {
+    const container = document.createElement('div');
+    container.id = 'preloader-container';
+    container.style.position = 'fixed';
+    container.style.top = '0';
+    container.style.left = '0';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.backgroundColor = 'white'; // Set background color to white
+    container.style.display = 'flex';
+    container.style.justifyContent = 'center';
+    container.style.alignItems = 'center';
+    container.style.zIndex = '9999';
+    document.body.appendChild(container);
+    return container;
+};
 
-    const lottieContainer = document.createElement('div');
-    lottieContainer.id = 'lottieContainer';
-    lottieContainer.style.cssText = `
-        max-width: 100%;
-        max-height: 100%;
-        display: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    `;
+// Load the Lottie animation
+const loadLottieAnimation = async (container) => {
+    try {
+        // Dynamically load the Lottie library if not already loaded
+        if (!window.lottie) {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js';
+            script.async = true;
+            document.head.appendChild(script);
+            await new Promise((resolve) => {
+                script.onload = resolve;
+            });
+        }
 
-    document.body.appendChild(overlay);
-    document.body.appendChild(lottieContainer);
-
-    function hideOverlay() {
-        overlay.style.display = 'none';
-        lottieContainer.style.display = 'block';
-        // Load the Lottie animation
-        lottie.loadAnimation({
-            container: lottieContainer,
-            renderer: 'canvas', // or 'canvas' if preferred
+        // Play the animation
+        window.lottie.loadAnimation({
+            container: container,
+            renderer: 'svg', // SVG renderer for best quality and performance
             loop: true,
             autoplay: true,
             path: 'https://guru-prasad-aol.github.io/preloaderJSLottie/JoynIncreasesWhenSharedAnimation.lottie',
         });
+    } catch (error) {
+        console.error('Error loading Lottie animation:', error);
     }
+};
 
-    // Use only the load event to hide the overlay and start the animation
-    window.addEventListener('load', hideOverlay);
-}
+// Remove the preloader after the main content has loaded
+const removePreloader = (container) => {
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            container.style.opacity = '0'; // Smooth fade-out
+            setTimeout(() => {
+                container.remove();
+            }, 500); // Allow time for fade-out animation
+        }, 1000); // Keep preloader visible for at least 1 second
+    });
+};
+
+// Initialize the preloader
+const initPreloader = () => {
+    const container = createPreloaderContainer();
+    loadLottieAnimation(container);
+    removePreloader(container);
+};
+
+// Run the preloader script
+initPreloader();
